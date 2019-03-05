@@ -1,0 +1,47 @@
+<h1>List Peminjaman Anda</h1>
+<% if session[:user_id].present? %>
+<%= link_to 'Logout', logout_path,
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %>|
+<%= link_to 'Daftar Buku', books_path %>|
+<% end %>
+<table>
+  <tr>
+    <td>Status</td>
+    <td>Tanggal Meminjam</td>
+    <td>Tanggal Harus Mengembalikan:</td>
+<% if session[:admin].present? %>
+    <td>Nama Peminjam:</td>
+<% end %>
+    <td>Judul Buku:</td>
+    <td>Tanggal Mengembalikan:</td>
+    <td>Harga Denda:</td>
+    <td></td>
+
+  </tr>
+<% @orders.each do |order| %>
+  <tr>
+    <td><%= order.status %></td>
+    <td><%= order.tanggal_ambil %></td>
+    <td><%= order.tanggal_sampai %></td>
+<% if session[:admin].present? %>
+    <td><%= order.user.fullname %></td>
+<% end %>
+    <td><%= order.book.nama %></td>
+    <td><%= order.tanggal_dibalikin %></td>
+    <% if order.status =="Sudah Kembali" %>
+    <td><%= order.denda %></td><% end %>
+    <td></td><% if order.status =="Dipinjam" %>
+    <td><%= link_to 'Kembalikan', order_path(order) ,
+            method: :patch,
+            data: { confirm: 'Are you sure?' } %></td><% end %>
+    <% if order.denda != 0  %>
+    <% if order.denda != nil  %>
+    <td><%= link_to 'Bayar Denda', bayar_path(order) ,
+                    method: :put,
+                    data: { confirm: 'Are you sure?' } %></td><% end %><% end %>
+
+
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,39 @@
+<h1>Listing articles</h1>
+<% if session[:user_id].present? %>
+<%= link_to 'Logout', logout_path,
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %>|
+<% if session[:admin].present? %><%= link_to 'New Books', new_book_path %>
+|
+<%= link_to 'New Category', new_category_path %>|<% end %>
+<%= link_to 'Lihat Buku yang Anda Pinjam', orders_path %>|
+<% else %>
+<%= link_to 'Login', login_path %>|
+<% end %>
+
+<table>
+  <tr>
+    <th>Judul</th>
+    <th>Penerbit</th>
+    <th>Stok</th>
+    <th>Category</th>
+    <th></th>
+  </tr>
+
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.nama %></td>
+      <td><%= book.penerbit %></td>
+      <td><%= book.stok %></td>
+      <td><%= book.category.nama %></td>
+      <td><% if book.stok>0 %><%= link_to 'Pinjam', new_order_path(book: book.id) %>  <% end %></td>
+      <td><%= link_to 'Show', book_path(book) %></td>
+      <% if session[:admin].present? %>
+      <td><%= link_to 'Edit', edit_book_path(book) %></td>
+      <td><%= link_to 'Destroy', book_path(book),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+      <% end %>
+  <% end %>
+</table>

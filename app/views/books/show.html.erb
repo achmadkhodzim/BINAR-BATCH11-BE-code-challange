@@ -1,0 +1,23 @@
+<p>
+  <strong>Judul:</strong>
+  <%= @book.nama %>
+</p>
+
+<p>
+  <strong>Penerbit:</strong>
+  <%= @book.penerbit %>
+</p>
+<p>
+  <strong>Stok:</strong>
+  <%= @book.stok %>
+</p>
+<p>
+  <strong>Category:</strong>
+  <%= @book.category.nama %>
+</p>
+
+
+<% if session[:admin].present? %>
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<% end %>
+<%= link_to 'Back', books_path %>

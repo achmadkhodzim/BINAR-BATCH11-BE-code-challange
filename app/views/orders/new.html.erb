@@ -1,0 +1,32 @@
+<%= form_with(model: @order, local: true) do |form| %>
+
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@order.errors.count, "error") %> prohibited
+        this order from being saved:
+      </h2>
+      <ul>
+        <% @order.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :tanggal_ambil %><br>
+    <%= form.date_select :tanggal_ambil ,selected: Date.today , :disabled => true %>
+  </p>
+
+  <p>
+    <%= form.label :tanggal_sampai %><br>
+    <%= form.date_select :tanggal_sampai %>
+  </p>
+    <p>
+      <%= form.hidden_field :books_id,:value => params[:book] %>
+    </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

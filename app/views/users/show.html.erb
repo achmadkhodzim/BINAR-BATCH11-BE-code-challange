@@ -1,0 +1,20 @@
+<p>
+  <strong>Nama:</strong>
+  <%= @user.fullname %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<p>
+  <strong>Password:</strong>
+  <%= @user.password %>
+</p>
+<p>
+  <strong>Alamat:</strong>
+  <%= @user.alamat %>
+</p>
+<%= link_to 'Jadikan Admin', user_path(@user) ,
+        method: :put,
+        data: { confirm: 'Are you sure?' } %>

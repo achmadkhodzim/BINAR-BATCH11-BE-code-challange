@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  user: one
+  book: one
+  tanggal_pinjam: 2019-03-05 10:36:51
+  tanggal_kembali: 2019-03-05 10:36:51
+
+two:
+  status: MyString
+  user: two
+  book: two
+  tanggal_pinjam: 2019-03-05 10:36:51
+  tanggal_kembali: 2019-03-05 10:36:51
